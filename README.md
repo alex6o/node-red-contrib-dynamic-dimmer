@@ -1,9 +1,9 @@
 # node-red-contrib-dynamic-dimmer
 
-The Dynamic Dimmer node for Node-RED was build to mimic the behavior of a physical dimmer switch. A typical use case for this node is the dimming of light bulbs (e.g. Ikea Trådfri bulbs) to a given brightness or hue. In general, it allows a linear animation/easing of a value over a certain time frame. 
+The Dynamic Dimmer node for Node-RED was build to mimic the behavior of a physical dimmer switch. A typical use case for this node is the dimming of light bulbs (e.g. Ikea Trådfri bulbs) to a given brightness. In general, it allows a linear animation/easing of a value over a certain time frame. 
 
 ## How to use this node
-Similar to a physical dimmer switch, the desired value is specified with the **input** value (`msg.payload`) between **[0,1]**. The node will then use the following node settings to continuously step towards the target value, while emitting the current value on the output with each step.
+Similar to a physical dimmer switch, you can specify the desired brightness, or any other parameter, with a **input** (`msg.payload`) between **[0,1]**. The node will then start to emit a series of values in a certain interval until the expected value is reached.
 
 ### Node configuration
 
@@ -17,7 +17,7 @@ Lets assume the following node configuration:
 * **Steps**: 10
 * **Event interval**: 200ms
 
-If the node receives in the initial state on the input a message with e.g. `msg.payload = 0.5` the node will emit 10, 20, 30, 40 and 50 on the output (to `msg.payload`) in a 200ms interval.
+When the node receives in the initial state on the input a message with e.g. `msg.payload = 0.5` the node will emit 10, 20, 30, 40 and 50 on the output (to `msg.payload`) in a 200ms interval.
 
 ### Advanced usage
 Lets imagine that we want to make the dim speed of a light bulb depending on the time of the day. This use case would require to modify the node configuration (e.g. the event interval) at runtime. The dynamic dimmer node supports another input format to enable runtime modifications of the node config: 
@@ -38,7 +38,7 @@ Lets imagine that we want to make the dim speed of a light bulb depending on the
     }
 }
 ```
-Please note that the previous input value now corresponds to the `target` field and that **partial** configuration updates are supported - so there is no need to always provide each property!
+Please note that **partial** configuration updates are supported. Hence, you only need to provide the parameters which should be modified.
 
 #### The `command` property
 In general, the process of dimming has a very async behavior because one input event triggers a series of output events. For more control of ongoing operations the following commands were introduced:
