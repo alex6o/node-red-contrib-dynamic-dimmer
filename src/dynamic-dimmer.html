@@ -1,0 +1,57 @@
+<script type="text/javascript">
+    RED.nodes.registerType('dynamic-dimmer', {
+        category: 'function',
+        color: '#00f7c2',
+        defaults: {
+            name: { value: "" },
+            eventInterval: { value: 200, required: true, validate: RED.validators.number() },
+            steps: { value: 10, required: true, validate: RED.validators.number() },
+            minValue: { value: 0, required: true, validate: RED.validators.number() },
+            maxValue: { value: 100, required: true, validate: RED.validators.number() }
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-signal",
+        label: function () {
+            return this.name || "dynamic-dimmer";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="dynamic-dimmer">
+
+    <div class="form-row">
+        <label for="node-input-minValue"><i class="fa fa-sign-out"></i> Minimum Value</label>
+        <input type="text" id="node-input-minValue" placeholder="Minimum Value">
+    </div>
+    <div class="form-row">
+        <label for="node-input-maxValue"><i class="fa fa-sign-in"></i> Maximum Value</label>
+        <input type="text" id="node-input-maxValue" placeholder="Maximum Value">
+    </div>
+    <div class="form-row">
+        <label for="node-input-steps"><i class="fa fa-angle-double-right"></i> Steps</label>
+        <input type="text" id="node-input-steps" placeholder="Steps">
+    </div>
+    <div class="form-row">
+        <label for="node-input-eventInterval"><i class="fa fa-clock-o"></i> Event Interval</label>
+        <input type="text" id="node-input-eventInterval" placeholder="Event Interval">
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="dynamic-dimmer">
+    <p>This node implements a dimming behavior similar to a physical dimmer switch. The desired value is specified with the input value (msg.payload) between [0,1]. The node will then use the min and max values to continuously step towards the target value, while emitting the current value on the output with each step.</p>    
+
+    <h3>Inputs</h3>
+        <dl class="message-properties">
+        <dt>
+            payload
+            <span class="property-type">number</span>
+        </dt>
+        <dd>
+            Defines the target of the dimmer and should be between [0,1]. 
+        </dd>
+ </script>
