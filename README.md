@@ -1,5 +1,8 @@
 # node-red-contrib-dynamic-dimmer
 
+![Coveralls github](https://img.shields.io/coveralls/github/alex6o/node-red-contrib-dynamic-dimmer)
+[![platform](https://img.shields.io/badge/platform-Node--RED-red)](https://www.nodered.org)
+
 The Dynamic Dimmer node for Node-RED was build to mimic the behavior of a physical dimmer switch. A typical use case for this node is the dimming of light bulbs (e.g. Ikea Trådfri bulbs) to a given brightness. In general, it allows a linear animation/easing of a value over a certain time frame. 
 
 <p align="center"> 
