@@ -3,6 +3,7 @@
   "version": "0.0.0",
   "description": "A dimmer node for Node-RED",
   "keywords": [
+    "node-red",
     "dynamic dimmer",
     "dimmer",
     "switch",
