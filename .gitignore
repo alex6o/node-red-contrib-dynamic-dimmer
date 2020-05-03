@@ -22,8 +22,10 @@ node_modules/
 # vs code
 .vscode
 
-
 # Build and dev dirs
 dist
 data
 coverage
+
+# pack
+*.tgz

@@ -1,9 +1,28 @@
 {
   "name": "node-red-contrib-dynamic-dimmer",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "A dimmer node for Node-RED",
-  "main": "index.js",
-  "keywords": [ "dynamic dimmer", "dimmer", "switch", "animation", "ease"],
+  "keywords": [
+    "dynamic dimmer",
+    "dimmer",
+    "switch",
+    "animation",
+    "ease",
+    "iot"
+  ],
+  "homepage": "https://github.com/alex6o/node-red-contrib-dynamic-dimmer#readme",
+  "bugs": {
+    "url": "https://github.com/alex6o/node-red-contrib-dynamic-dimmer/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "dist/**/*"
+  ],
+  "main": "dist/dynamic-dimmer.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alex6o/node-red-contrib-dynamic-dimmer.git"
+  },
   "scripts": {
     "build": "tsc && cp ./src/*.html ./dist/",
     "dev": "npm run build && docker-compose restart",
