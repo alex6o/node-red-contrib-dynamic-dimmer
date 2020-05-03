@@ -7,7 +7,7 @@ function convertTargetValueInput(input: any): any {
         if (typeof input.payload === "number") {
             const msg = new InputMessage();
             msg.payload = new DimCommandMessage()
-            msg.payload.target = input.payload;
+            msg.payload.target = parseFloat(input.payload);
             return msg;
         }
     }

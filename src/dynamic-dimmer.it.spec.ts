@@ -63,7 +63,7 @@ describe('integration of the dynamic dimmer node', () => {
                     done();
                 }
             });
-            n1.receive({ payload: 1.0 });
+            n1.receive({ payload: 1 });
         });
     });
 
@@ -82,14 +82,14 @@ describe('integration of the dynamic dimmer node', () => {
                 responseCount++;
 
                 if (responseCount == STEPS) {
-                    n1.receive({ payload: 0.0 });
+                    n1.receive({ payload: 0 });
                 }
                 if (responseCount == STEPS * 2) {
                     expect(Math.round(msg.payload)).toBe(0);
                     done();
                 }
             });
-            n1.receive({ payload: 1.0 });
+            n1.receive({ payload: 1 });
         });
     });
 
@@ -119,7 +119,7 @@ describe('integration of the dynamic dimmer node', () => {
                     done();
                 }
             });
-            n1.receive({ payload: 1.0 });
+            n1.receive({ payload: 1 });
         });
     });
 });
