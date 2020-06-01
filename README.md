@@ -9,6 +9,10 @@ The Dynamic Dimmer node for Node-RED was build to mimic the behavior of a physic
     <img src="./docs/img/node-demo.gif" width="905">
 </p>
 
+## Credits
+
+* [woozar](https://github.com/woozar) - **his node [node-red-contrib-time-based-dimmer](https://github.com/woozar/node-red-contrib-time-based-dimmer) was the basis and a huge inspiration for this project!**
+
 ## How to use this node
 Similar to a physical dimmer switch, you can specify the desired brightness, or any other parameter, with a **input** (`msg.payload`) between **[0,1]**. The node will then start to emit a series of values in a certain interval until the expected value is reached.
 
@@ -73,7 +77,3 @@ docker ps
 # install the node in the container
 docker exec -it <CONTAINER_ID> /bin/bash -c "cd /data && npm install ./node-red-contrib-dynamic-dimmer"
 ```
-
-## Credits
-
-* [woozar](https://github.com/woozar) - his node [node-red-contrib-time-based-dimmer](https://github.com/woozar/node-red-contrib-time-based-dimmer) was a huge inspiration for this project!
