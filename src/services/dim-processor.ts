@@ -90,19 +90,43 @@ export class DimProcessor {
         return of(this.currentValue);
     }
 
-    public reset(config?: DimConfigUpdate): Observable<number> {
+
+    public set(target: number, config?: DimConfigUpdate): Observable<number> {
 
         this.mergeDimConfig(Object.assign(this.defaultConfig, config));
         this.stopDimProcessing();
 
-        return of(this.config.minValue)
+        const context: DimContext = Object.assign(
+            this.config,
+            {
+                currentValue: this.currentValue,
+                t: target,
+                target: target,
+                sign: 1.0,
+                easeFn: this.easeFn
+            });
+
+
+        return of(context)
             .pipe(
-                map(v => {
-                    this.currentValue = v;
-                    this.t = 0.0;
+                map(c => {
+                    c.currentValue = math.chain(c.easeFn(c.t))
+                        .multiply(c.maxValue)
+                        .round(ROUNDING_DECIMALS)
+                        .done();
+                    
+                    c.currentValue = Math.max(Math.min(c.maxValue, c.currentValue), c.minValue);
+                    
+                    // update global state
+                    this.currentValue = c.currentValue;
+                    this.t = c.t;
                     return this.currentValue;
                 })
             );
+    }
+
+    public reset(config?: DimConfigUpdate): Observable<number> {
+        return this.set(0.0, config);
     }
 
     private mergeDimConfig(newConfig: DimConfigUpdate): void {

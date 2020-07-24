@@ -163,7 +163,7 @@ describe('test behavior of dim processor', () => {
                 dimProcessor.dim(1.0)
                     .pipe(tap(x => {
                         if (x == 75) {
-                            // trigger a dim down event
+                            // trigger a reset event
                             reset$ = dimProcessor.reset();
                         }
                     })))
@@ -179,6 +179,38 @@ describe('test behavior of dim processor', () => {
             done();
         });
     });
+
+
+    test('should stop dim operation and set to specified settings', (done) => {
+        const dimProcessor = new DimProcessor(dimConfig, scheduler);
+        let reset$: Observable<number>;
+
+        scheduler.run((helpers: any) => {
+            const { expectObservable } = helpers;
+            const expectedValues = { a: 25, b: 50, c: 75 };
+            const expectedMarble = '--a-b-|';
+
+            expectObservable(
+                dimProcessor.dim(1.0)
+                    .pipe(tap(x => {
+                        if (x == 75) {
+                            // trigger a set event
+                            reset$ = dimProcessor.set(0.3);
+                        }
+                    })))
+                .toBe(expectedMarble, expectedValues);
+        });
+
+        scheduler.run((helpers: any) => {
+            const { expectObservable } = helpers;
+            const expectedValues = { a: 30 };
+            const expectedMarble = '------(a|)';
+
+            expectObservable(reset$).toBe(expectedMarble, expectedValues);
+            done();
+        });
+    });
+    
 
     test('should reset to partially new settings', (done) => {
         const dimProcessor = new DimProcessor(dimConfig, scheduler);

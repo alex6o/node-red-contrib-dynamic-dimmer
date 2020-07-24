@@ -55,6 +55,7 @@ Please note that **partial** configuration updates are supported. Hence, you onl
 In general, the process of dimming has a very async behavior because one input event triggers a series of output events. For more control of ongoing operations the following commands were introduced:
 * `DIM` - this is the default operation and instructs the node to reach the `target` value. If there is already a dimming operation in progress, the node will switch to the new dim target value.
 * `PAUSE` - pause an ongoing dim operation (`target` should not be set)
+* `SET` - skips the dim operation and sets the dimmer immediately to the `target` value.
 * `RESET` - resets the node to it's initial configuration and sets the output to the `minValue`. If additional config properties are sent, it will merge them with the initial configuration.
 
 ## Contribute
