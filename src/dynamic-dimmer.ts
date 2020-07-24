@@ -74,6 +74,9 @@ module.exports = (RED: Red): void => {
                 case DimCommand.PAUSE:
                     dimOperation$ = this.dimProcessor.pause();
                     break;
+                case DimCommand.SET:
+                    dimOperation$ = this.dimProcessor.set(dimMsg.target, config);
+                    break;
                 case DimCommand.RESET:
                     dimOperation$ = this.dimProcessor.reset(config);
                     break;

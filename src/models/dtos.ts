@@ -5,6 +5,7 @@ import 'reflect-metadata';
 export enum DimCommand {
     DIM = "DIM",
     PAUSE = "PAUSE",
+    SET = "SET",
     RESET = "RESET"
 }
 

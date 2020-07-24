@@ -122,4 +122,22 @@ describe('integration of the dynamic dimmer node', () => {
             n1.receive({ payload: 1 });
         });
     });
+
+
+    test('should set to specified value', (done) => {
+
+        expect.assertions(1);
+        helper.load(dynamicDimmer, flow, () => {
+            const n1 = helper.getNode("n1") as any;
+            const n2 = helper.getNode("n2") as any;
+            
+            n1.receive({ payload: { command: DimCommand.SET.toString(), target: 0.3 } });
+
+            n2.on("input", (msg: any) => {
+                expect(Math.round(msg.payload)).toBe(30);
+                done();
+            });
+            n1.receive({ payload: 1 });
+        });
+    });
 });
