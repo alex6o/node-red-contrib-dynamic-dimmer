@@ -37,7 +37,7 @@ module.exports = (RED: Red): void => {
                     const sendValue = {
                         next: (v: number): void => {
                             this.reportStatus(v);
-                            send({ payload: v });
+                            send(Object.assign(msg, { payload: v }));
                         },
                         complete: (): void => {
                             this.clearStatus();

@@ -47,7 +47,7 @@ describe('integration of the dynamic dimmer node', () => {
 
     test('should dim up', (done) => {
 
-        expect.assertions(STEPS + 1);
+        expect.assertions(2 * STEPS + 2);
 
         helper.load(dynamicDimmer, flow, () => {
             const n1 = helper.getNode("n1") as any;
@@ -56,14 +56,16 @@ describe('integration of the dynamic dimmer node', () => {
 
             n2.on("input", (msg: any) => {
                 expect(msg.payload).toEqual(expect.any(Number));
+                expect(msg.topic).toEqual("topic000");
                 responseCount++;
 
                 if (responseCount == STEPS) {
                     expect(Math.round(msg.payload)).toBe(100);
+                    expect(msg.topic).toEqual("topic000");
                     done();
                 }
             });
-            n1.receive({ payload: 1 });
+            n1.receive({ payload: 1 , topic: "topic000"});
         });
     });
 
