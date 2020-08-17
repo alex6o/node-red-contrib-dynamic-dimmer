@@ -5,7 +5,8 @@ import { easeLinear } from 'd3-ease';
 import * as math from 'mathjs';
 import { DimConfig, DimConfigUpdate, DimContext } from '../models/dim';
 
-const ROUNDING_DECIMALS = 3;
+const ROUNDING_DECIMALS = 4;
+const T_ROUNDING_DECIMALS = 6;
 
 export class DimProcessor {
     private currentValue: number;
@@ -59,7 +60,10 @@ export class DimProcessor {
         return combineLatest(this.timeSequence$, of(context), (t, c) => c)
             .pipe(
                 map(c => {
-                    c.t = c.t + (c.sign * c.step);
+                    c.t = math.chain(c.t)
+                        .add(c.sign * c.step)
+                        .round(T_ROUNDING_DECIMALS)
+                        .done();                        
                     c.currentValue = math.chain(c.easeFn(c.t))
                         .multiply(c.maxValue)
                         .round(ROUNDING_DECIMALS)
