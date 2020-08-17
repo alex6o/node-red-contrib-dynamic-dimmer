@@ -142,4 +142,35 @@ describe('integration of the dynamic dimmer node', () => {
             n1.receive({ payload: 1 });
         });
     });
+
+    
+    test('should dim up in 25 steps (rounding issues)', (done) => {
+
+        const flow = [{
+            id: "n1",
+            type: "dynamic-dimmer",
+            name: "my-test-name",
+            eventInterval: 10,
+            steps: 25,
+            minValue: 0,
+            maxValue: 100,
+            wires: [["n2"]]
+        },
+        { id: "n2", type: "helper" }
+        ];
+
+        helper.load(dynamicDimmer, flow, () => {
+            const n1 = helper.getNode("n1") as any;
+            const n2 = helper.getNode("n2") as any;
+
+            n2.on("input", (msg: any) => {
+                expect(msg.payload).toEqual(expect.any(Number));
+
+                if (msg.payload === 100) {
+                    done();
+                }
+            });
+            n1.receive({ payload: 1 });
+        });
+    });
 });
