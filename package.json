@@ -54,7 +54,7 @@
     "@marcj/marshal": "^2.1.13",
     "d3-ease": "^1.0.6",
     "dot-prop": "^5.2.0",
-    "mathjs": "^6.6.4",
+    "mathjs": "^7.5.1",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.5.5"
   }
