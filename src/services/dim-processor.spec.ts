@@ -106,7 +106,6 @@ describe('test behavior of dim processor', () => {
             expectObservable(
                 dimProcessor.dim(1.0))
                 .toBe(expectedMarble, expectedValues);
-            done();
         });
 
         scheduler.run((helpers: any) => {
@@ -222,6 +221,19 @@ describe('test behavior of dim processor', () => {
 
             expectObservable(dimProcessor.reset({ minValue: expectedValues.a }))
                 .toBe(expectedMarble, expectedValues);
+            done();
+        });
+    });
+
+    test('should perform a dim up operation with a given start value', (done) => {
+        const dimProcessor = new DimProcessor(dimConfig, scheduler);
+
+        scheduler.run((helpers: any) => {
+            const { expectObservable } = helpers;
+            const expectedValues = { b: 50, c: 75, d: 100 };
+            const expectedMarble = '--b-c-d-|';
+
+            expectObservable(dimProcessor.dim(1.0, 0.25, null)).toBe(expectedMarble, expectedValues);
             done();
         });
     });

@@ -30,6 +30,13 @@ export class DimCommandMessage {
         }
     })
     target?: number;
+    @f.type(Number).optional()
+    @f.validator((value: any) => {
+        if (value !== undefined && (value < 0.0 || value > 1.0)) {
+            return new PropertyValidatorError('start', 'value needs to be in [0,1]');
+        }
+    })
+    start?: number;
     @f.type(DimConfigUpdate).optional()
     config?: DimConfigUpdate;
 }
