@@ -139,7 +139,15 @@ describe('dynamic dimmer node', () => {
         expect(doneCb).toHaveBeenCalledTimes(1);
         expect(typeof doneCb.mock.calls[0][0]).toBe("string")
         expect(doneCb.mock.calls[0][0]).toContain("Invalid")
+        
 
+        jest.clearAllMocks();
+        _sendMsg({"target": 1, "start": 1.1}, sendCb, doneCb);
+        expect(dimProcessor.dim).toHaveBeenCalledTimes(0);
+        expect(sendCb).toHaveBeenCalledTimes(0);
+        expect(doneCb).toHaveBeenCalledTimes(1);
+        expect(typeof doneCb.mock.calls[0][0]).toBe("string")
+        expect(doneCb.mock.calls[0][0]).toContain("Invalid")
     });
 
     test('should trigger a validation error for unknown commands', (done) => {
