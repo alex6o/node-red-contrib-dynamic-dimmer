@@ -1,7 +1,7 @@
-import { NodeProperties } from 'node-red'
+import { NodeDef } from 'node-red';
 import { ValidationError } from '@marcj/marshal';
 
-export interface NodeConfig extends NodeProperties {
+export interface NodeConfig extends NodeDef {
     name: string;
     eventInterval: number;
     steps: number;

@@ -35,13 +35,16 @@ export class DimProcessor {
         this.easeFn = easeLinear;
     }
 
-    public dim(target: number, config?: DimConfigUpdate): Observable<number> {
+    public dim(target: number, start?:number, config?: DimConfigUpdate): Observable<number> {
 
         this.mergeDimConfig(config);
 
         // cancel existing streams
         this.stopDimProcessing();
         this.dimStopSignal$ = new Subject();
+
+        // override t if start is provided
+        this.t = start ?? this.t
 
         const context: DimContext = Object.assign(
             this.config,

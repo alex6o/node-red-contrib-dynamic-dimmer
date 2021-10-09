@@ -1,4 +1,4 @@
-import { Red, Node } from 'node-red'
+import { NodeAPI, Node } from 'node-red';
 import { DimProcessorFactory, DimProcessor } from './services/dim-processor';
 import { NodeConfig, InputValidationError } from './models/node';
 import { Observable, empty } from 'rxjs';
@@ -7,7 +7,7 @@ import { DimCommandMessage, DimCommand } from './models/dtos';
 import { convertInput, convertDimConfigUpdate } from './converter/dto-converter';
 
 
-module.exports = (RED: Red): void => {
+module.exports = (RED: NodeAPI): void => {
 
     class DynamicDimmerController {
         private dimProcessor: DimProcessor;
@@ -69,7 +69,7 @@ module.exports = (RED: Red): void => {
 
             switch (dimMsg.command) {
                 case DimCommand.DIM:
-                    dimOperation$ = this.dimProcessor.dim(dimMsg.target, config);
+                    dimOperation$ = this.dimProcessor.dim(dimMsg.target, dimMsg.start, config);
                     break;
                 case DimCommand.PAUSE:
                     dimOperation$ = this.dimProcessor.pause();
